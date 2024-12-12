@@ -8,23 +8,46 @@ const (
 	Clubs    = '\u2663' // Kreuz
 	Hearts   = '\u2665' // Herz
 
-	Six   = '\u2465'
-	Seven = '\u2466'
-	Eight = '\u2467'
-	Nine  = '\u2468'
-	Ten   = '\u2469'
-	Jack  = 'J'
-	Queen = 'Q'
-	King  = 'K'
-	Ace   = 'A'
+	Six   = "⑥"
+	Seven = "⑦"
+	Eight = "⑧"
+	Nine  = "⑨"
+	Ten   = "⑩"
+	Jack  = "J"
+	Queen = "Q"
+	King  = "K"
+	Ace   = "A"
 )
 
 func main() {
 	suits := []rune{Diamonds, Spades, Clubs, Hearts}
-	ranks := []rune{Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace}
+	ranks := []string{Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace}
 
-	// TODO: Loop over suits and ranks to output all combinations.
+	fmt.Println("Direkte Ausgabe ohne Map:")
+	for _, rank := range ranks {
+		for _, suit := range suits {
+			// Ausgabe
+			fmt.Printf("%c%s\t", suit, rank)
+		}
+		fmt.Println()
+	}
 
-	// TODO: delete this line afterwards
-	fmt.Println(suits, ranks)
+	// Die Map "cards"
+	cards := map[rune][]string{
+		Diamonds: {Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace},
+		Spades:   {Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace},
+		Clubs:    {Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace},
+		Hearts:   {Six, Seven, Eight, Nine, Ten, Jack, Queen, King, Ace},
+	}
+
+	// Ausgabe der Karten mit der Map
+	fmt.Println("\nAusgabe mit der Map:")
+	for i := 0; i < len(cards[Diamonds]); i++ {
+		for suit, ranks := range cards {
+			// Ausgabe
+			card := fmt.Sprintf("%c%s", suit, ranks[i])
+			fmt.Print(card + "\t")
+		}
+		fmt.Println()
+	}
 }
